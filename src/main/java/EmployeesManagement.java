@@ -12,36 +12,14 @@ public class EmployeesManagement {
 //         testConnectionB();
 //         testGetAll();
 //         testGetById();
-         testInsert();
+//         testInsert();
+         testInsert2();
 
 
-//        //Connecting to the same database using an implementation of the DataSource interface:
-//        MysqlDataSource dataSource = new MysqlDataSource();
-//        dataSource.setUrl(System.getenv("DB_URL"));
-//        dataSource.setUser(System.getenv("DB_USER"));
-//        dataSource.setPassword(System.getenv("DB_PASSWORD"));
-//
-//        try (Connection connection = dataSource.getConnection()) {
-//            PreparedStatement statement = connection.prepareStatement("SELECT * FROM employee WHERE first_name = ? OR employee_id = ?");
-//
-//            int rowCount = statement.executeUpdate("INSERT INTO  employee VALUES (4, 'Daniel', 'daniel', 'daniel@gmail.com',2345,'2002-01-02','Java Programmer',700)");
-//            statement.setString(1, "Leo");
-//            statement.setInt(2, 2);
-//
-//
-//            final ResultSet resultSet = statement.executeQuery();
-//            while (resultSet.next()) {
-//                System.out.println("First name is " + resultSet.getString(2));
-//            }
-//
-//        } catch (SQLException exp) {
-//            exp.printStackTrace();
-//        }
 //
 //
 //        //Drop table
 //        drop();
-//    }
 //
 //    private static void drop() {
 //        String connectionUrl = System.getenv("DB_URL");
@@ -98,12 +76,12 @@ public class EmployeesManagement {
 
         EmployeeManagement employeeManagement = new EmployeeManagement();
 
-        employeeManagement.setEmployeeId(3);
+        employeeManagement.setEmployeeId(4);
         employeeManagement.setFirstName("Daniel");
         employeeManagement.setLastName("Unknown");
         employeeManagement.setEmail("daniel.unknown@gmail.com");
         employeeManagement.setPhoneNumber(866788);
-        employeeManagement.setHireDate(LocalDate.of(2002, Month.DECEMBER, 14));
+        employeeManagement.setHireDate(LocalDate.of(2002, Month.DECEMBER, 1));
         employeeManagement.setJobTittle("Java Programmer");
         employeeManagement.setSalary(800.00);
 
@@ -128,5 +106,11 @@ public class EmployeesManagement {
     public static void testInsert() {
         EmployeeManagementRepository repository = new EmployeeManagementRepository();
         repository.insert();
+    }
+
+    public static void testInsert2() {
+        EmployeeManagement employeeManagement = createEmployeeManagement();
+        EmployeeManagementRepository repository = new EmployeeManagementRepository();
+        repository.insert(employeeManagement);
     }
 }

@@ -96,4 +96,38 @@ public class EmployeeManagementRepository {
         }
     }
 
+    public void insert(EmployeeManagement employeeManagement) {
+        String connectionURL = System.getenv("DB_URL");
+        String username = System.getenv("DB_USER");
+        String password = System.getenv("DB_PASSWORD");
+
+        String insertQuery = "INSERT INTO employee(employee_id, first_name, last_name, email, phone_number , hire_date, job_title , salary)"
+                + " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (final Connection connection = DriverManager.getConnection(connectionURL, username, password);
+             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
+
+            preparedStatement.setInt(1,employeeManagement.getEmployeeId());
+            preparedStatement.setString(2, employeeManagement.getFirstName());
+            preparedStatement.setString(3, employeeManagement.getLastName());
+            preparedStatement.setString(4, employeeManagement.getEmail());
+            preparedStatement.setInt(5, employeeManagement.getPhoneNumber());
+            LocalDate hireDate = employeeManagement.getHireDate();
+            preparedStatement.setDate(6, Date.valueOf(hireDate));
+            preparedStatement.setString(7, employeeManagement.getJobTittle());
+            preparedStatement.setDouble(8, employeeManagement.getSalary());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Employee inserted successfully!");
+            } else {
+                System.out.println("Failed to insert employee.");
+            }
+
+        } catch (SQLException exp) {
+            exp.printStackTrace();
+        }
+    }
+
 }
