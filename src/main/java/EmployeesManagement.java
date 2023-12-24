@@ -8,10 +8,11 @@ import org.example.employeeManagement.repository.EmployeeManagementRepository;
 
 public class EmployeesManagement {
     public static void main(String[] args) {
-         testConnectionA();
-         testConnectionB();
-         testGetAll();
-         testGetById();
+//         testConnectionA();
+//         testConnectionB();
+//         testGetAll();
+//         testGetById();
+         testInsert();
 
 
 //        //Connecting to the same database using an implementation of the DataSource interface:
@@ -97,12 +98,12 @@ public class EmployeesManagement {
 
         EmployeeManagement employeeManagement = new EmployeeManagement();
 
-        employeeManagement.setEmployeeId(1);
-        employeeManagement.setFirstName("Ana");
-        employeeManagement.setLastName("anna");
-        employeeManagement.setEmail("ana@gmail.com");
+        employeeManagement.setEmployeeId(3);
+        employeeManagement.setFirstName("Daniel");
+        employeeManagement.setLastName("Unknown");
+        employeeManagement.setEmail("daniel.unknown@gmail.com");
         employeeManagement.setPhoneNumber(866788);
-        employeeManagement.setHireDate(LocalDate.of(2020, Month.DECEMBER, 14));
+        employeeManagement.setHireDate(LocalDate.of(2002, Month.DECEMBER, 14));
         employeeManagement.setJobTittle("Java Programmer");
         employeeManagement.setSalary(800.00);
 
@@ -122,5 +123,10 @@ public class EmployeesManagement {
         EmployeeManagementRepository repository = new EmployeeManagementRepository();
         int idToRetrieve = 1;
         repository.getById(idToRetrieve);
+    }
+
+    public static void testInsert() {
+        EmployeeManagementRepository repository = new EmployeeManagementRepository();
+        repository.insert();
     }
 }
