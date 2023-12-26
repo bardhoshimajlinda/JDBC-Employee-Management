@@ -158,4 +158,26 @@ public class EmployeeManagementRepository {
         }
     }
 
+
+    public void delete(EmployeeManagement employeeManagement) {
+        String connectionURL = System.getenv("DB_URL");
+        String username = System.getenv("DB_USER");
+        String password = System.getenv("DB_PASSWORD");
+
+        String deleteQuery = "DELETE FROM employee " +
+                "WHERE employee_id = ?";
+
+        try(Connection connection = DriverManager.getConnection(connectionURL, username, password);
+            PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
+
+            preparedStatement.setInt(1, employeeManagement.getEmployeeId());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            System.out.println(rowsAffected + " row updated.");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

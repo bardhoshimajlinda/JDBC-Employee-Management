@@ -8,29 +8,19 @@ import org.example.employeeManagement.repository.EmployeeManagementRepository;
 
 public class EmployeesManagement {
     public static void main(String[] args) {
-//         testConnectionA();
-//         testConnectionB();
-//         testGetAll();
-//         testGetById();
-//         testInsert();
-//         testInsert2();
+
+        testConnectionA();
+        testConnectionB();
+        testGetAll();
+        testGetById();
+        testInsert();
+        testInsert2();
         testUpdate();
+        testDelete();
 
+//      Drop table
+//      drop();
 
-//        //Drop table
-//        drop();
-//
-//    private static void drop() {
-//        String connectionUrl = System.getenv("DB_URL");
-//        String username = System.getenv("DB_USER");
-//        String password = System.getenv("DB_PASSWORD");
-//
-//        try (Connection connection = DriverManager.getConnection(connectionUrl, username, password);
-//             Statement dropStatement = connection.createStatement()) {
-//            dropStatement.execute("DROP TABLE IF EXISTS departments");
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
    }
 
     //Establishing a connection to the MySQL database using the DriverManager class:
@@ -115,4 +105,39 @@ public class EmployeesManagement {
         EmployeeManagementRepository repository = new EmployeeManagementRepository();
         repository.update(employeeManagement);
     }
+
+
+    public static EmployeeManagement deleteEmployeeManagement() {
+
+        EmployeeManagement empManagement = new EmployeeManagement();
+
+        empManagement.setEmployeeId(4);
+        empManagement.setFirstName("Daniel");
+        empManagement.setLastName("Unknown");
+        empManagement.setEmail("daniel.unknown123@gmail.com");
+        empManagement.setPhoneNumber(866788);
+        empManagement.setHireDate(LocalDate.of(2002, Month.DECEMBER, 1));
+        empManagement.setJobTittle("Java Programmer");
+        empManagement.setSalary(10000.00);
+
+        return empManagement;
+    }
+    public static void testDelete() {
+        EmployeeManagement employeeManagement = deleteEmployeeManagement();
+        EmployeeManagementRepository repository = new EmployeeManagementRepository();
+        repository.delete(employeeManagement);
+    }
+
+
+//       private static void drop() {
+//        String connectionUrl = System.getenv("DB_URL");
+//        String username = System.getenv("DB_USER");
+//        String password = System.getenv("DB_PASSWORD");
+//        try (Connection connection = DriverManager.getConnection(connectionUrl, username, password);
+//             Statement dropStatement = connection.createStatement()) {
+//            dropStatement.execute("DROP TABLE IF EXISTS departments");
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+
 }
