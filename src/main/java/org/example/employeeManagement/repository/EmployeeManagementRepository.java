@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 public class EmployeeManagementRepository {
 
-    public void getAll() throws SQLException {
+    public void getAll() {
         String connectionURL = System.getenv("DB_URL");
         String username = System.getenv("DB_USER");
         String password = System.getenv("DB_PASSWORD");
@@ -127,6 +127,34 @@ public class EmployeeManagementRepository {
 
         } catch (SQLException exp) {
             exp.printStackTrace();
+        }
+    }
+
+    public void update(EmployeeManagement employeeManagement) {
+        String connectionURL = System.getenv("DB_URL");
+        String username = System.getenv("DB_USER");
+        String password = System.getenv("DB_PASSWORD");
+
+        String updateQuery = "UPDATE employee " +
+                "SET first_name = ?, last_name = ?, email = ?, phone_number = ?, hire_date = ?, job_title = ?, salary = ? " +
+                "WHERE employee_id = ?";
+        try (Connection connection = DriverManager.getConnection(connectionURL, username, password);
+             PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
+
+            preparedStatement.setString(1, employeeManagement.getFirstName());
+            preparedStatement.setString(2, employeeManagement.getLastName());
+            preparedStatement.setString(3, employeeManagement.getEmail());
+            preparedStatement.setInt(4, employeeManagement.getPhoneNumber());
+            preparedStatement.setDate(5, Date.valueOf(employeeManagement.getHireDate()));
+            preparedStatement.setString(6, employeeManagement.getJobTittle());
+            preparedStatement.setDouble(7, employeeManagement.getSalary());
+            preparedStatement.setInt(8, employeeManagement.getEmployeeId());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            System.out.println(rowsAffected + " row(s) updated.");
+
+        }catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

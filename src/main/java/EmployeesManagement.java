@@ -13,11 +13,10 @@ public class EmployeesManagement {
 //         testGetAll();
 //         testGetById();
 //         testInsert();
-         testInsert2();
+//         testInsert2();
+        testUpdate();
 
 
-//
-//
 //        //Drop table
 //        drop();
 //
@@ -79,22 +78,19 @@ public class EmployeesManagement {
         employeeManagement.setEmployeeId(4);
         employeeManagement.setFirstName("Daniel");
         employeeManagement.setLastName("Unknown");
-        employeeManagement.setEmail("daniel.unknown@gmail.com");
+        employeeManagement.setEmail("daniel.unknown123@gmail.com");
         employeeManagement.setPhoneNumber(866788);
         employeeManagement.setHireDate(LocalDate.of(2002, Month.DECEMBER, 1));
         employeeManagement.setJobTittle("Java Programmer");
-        employeeManagement.setSalary(800.00);
+        employeeManagement.setSalary(10000.00);
 
         return employeeManagement;
     }
 
     public static void testGetAll()  {
         EmployeeManagementRepository employeeManagementRepository = new EmployeeManagementRepository();
-        try {
-            employeeManagementRepository.getAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        employeeManagementRepository.getAll();
+
     }
 
     public static void testGetById() {
@@ -112,5 +108,11 @@ public class EmployeesManagement {
         EmployeeManagement employeeManagement = createEmployeeManagement();
         EmployeeManagementRepository repository = new EmployeeManagementRepository();
         repository.insert(employeeManagement);
+    }
+
+    public static void testUpdate() {
+        EmployeeManagement employeeManagement = createEmployeeManagement();
+        EmployeeManagementRepository repository = new EmployeeManagementRepository();
+        repository.update(employeeManagement);
     }
 }
